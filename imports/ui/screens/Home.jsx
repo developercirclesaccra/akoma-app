@@ -14,17 +14,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RenderUser = props => {
   return props.profiles.map(profile => {
-    <UserCard
-      {...props}
-      key={profile._id}
-      fullName={profile.fullName}
-      skill={profile.skill}
-      bio={props.bio}
-    />;
+    if (!profile) return 'loading...';
+    console.log(profile);
+    return (
+      <UserCard
+        {...props}
+        key={profile._id}
+        fullName={profile.fullName}
+        skill={profile.skill}
+        bio={profile.bio}
+        id={profile._id}
+      />
+    );
   });
 };
 
 const Home = props => {
+  console.log(props);
   return (
     <div>
       <NavBar {...props} />
@@ -50,10 +56,8 @@ const Home = props => {
           </div>
         </div>
       </div>
-      <div className='row'>
-        <div className='col-sm-4'>
-          <RenderUser profiles={props.profiles} {...props} />
-        </div>
+      <div className='row  container my-4'>
+        <RenderUser profiles={props.profiles} {...props} />
       </div>
     </div>
   );
