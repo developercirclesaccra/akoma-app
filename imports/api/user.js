@@ -2,10 +2,16 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
 
-export const Users = new Mongo.Collection('users');
+export const Profiles = new Mongo.Collection('profiles');
+
+if (Meteor.isServer) {
+  Meteor.publish('profile', () => {
+    return Profiles.find();
+  });
+}
 
 Meteor.methods({
-  'user.insert'(userObj) {
+  'profile.create'(userObj) {
     check(userObj, Object);
     const {
       fullName,
@@ -19,7 +25,7 @@ Meteor.methods({
 
     if (!Meteor.user()) throw new Meteor.Error('not-authorized');
 
-    Users.insert({
+    Profiles.insert({
       fullName,
       age,
       gender,
@@ -31,7 +37,7 @@ Meteor.methods({
       createdAt: new Date()
     });
   },
-  'user.update'(userId, updateObj) {
+  'profile.update'(userId, updateObj) {
     check(userId, String);
     check(updateObj, Object);
 
@@ -52,7 +58,7 @@ Meteor.methods({
       skills
     } = updateObj;
 
-    Users.update(userId, {
+    Profiles.update(userId, {
       $set: {
         fullName,
         age,
@@ -65,7 +71,7 @@ Meteor.methods({
       }
     });
   },
-  'user.delete'(id) {
+  'profile.delete'(id) {
     check(id, String);
 
     // get user

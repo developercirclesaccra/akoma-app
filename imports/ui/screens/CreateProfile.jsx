@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Meteor} from 'meteor/meteor';
 
 import Card from 'react-bootstrap/Card';
@@ -43,7 +43,10 @@ const CreateProfile = props => {
       skill
     };
 
-    Meteor.call('user.insert', userObj);
+    Meteor.call('profile.create', userObj);
+
+    // redirect to home
+    props.history.push('/index');
   };
 
   return (
@@ -65,7 +68,10 @@ const CreateProfile = props => {
               </div>
               <div className='form-group'>
                 <label htmlFor='gender'>Gender</label>
-                <select value={gender} onChange={handleInputChange}>
+                <select
+                  value={inputsForm.gender}
+                  onChange={handleInputChange}
+                  className='form-control'>
                   <option>Select an option...</option>
                   <option value='female'>Female</option>
                   <option value='male'>Male</option>
@@ -117,7 +123,10 @@ const CreateProfile = props => {
               </div>
               <div>
                 <label htmlFor='skill'>Skill</label>
-                <select value={skill} onChange={handleInputChange}>
+                <select
+                  value={inputsForm.skill}
+                  onChange={handleInputChange}
+                  className='form-control'>
                   <option>Select an option...</option>
                   <option value='homecare'>Home care</option>
                   <option value='cleaner'>Cleaner</option>

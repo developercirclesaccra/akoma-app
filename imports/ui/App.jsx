@@ -11,7 +11,7 @@ import Signup from './screens/Signup.jsx';
 import UserProfile from './screens/UserProfile.jsx';
 import CreateProfile from './screens/CreateProfile.jsx';
 
-const App = () => {
+const App = () => (
   <Router history={history}>
     <Switch>
       <Route exact path='/' component={Home} />
@@ -21,7 +21,6 @@ const App = () => {
       <Route exact path='/userprofile/:id' component={UserProfile} />
       <Route exact path='/index' component={Home} />
     </Switch>
-  </Router>;
-};
-
+  </Router>
+);
 export default App;
