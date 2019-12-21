@@ -3,12 +3,20 @@ import {withTracker} from 'meteor/react-meteor-data';
 import {Link} from 'react-router-dom';
 
 // collections
-import {Profiles} from '../../api/user.js';
+import { Profiles } from '../../api/user.js';
+
+import UserCard from '../components/UserCard.component.jsx'
 // components
 import Header from '../components/Header.component.jsx';
 import NavBar from '../components/NavBar.component.jsx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+const RenderUser = props => {
+  return props.profiles.map(profile => {
+    <UserCard {...props} key={profile.id} fullName={profile.fullName} skill={profile.skill} bio={props.bio} />
+  })
+}
 
 const Home = props => {
   return (
@@ -36,7 +44,11 @@ const Home = props => {
           </div>
         </div>
       </div>
-      <div className='row'></div>
+      <div className='row'>
+        <div className="col-sm-4">
+          <RenderUser {...props}/>
+        </div>
+      </div>
     </div>
   );
 };

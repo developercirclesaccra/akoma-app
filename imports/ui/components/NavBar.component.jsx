@@ -22,6 +22,7 @@ const NavBar = props => {
   const doc = Profiles.findOne({user_id: Meteor.userId});
 
   if (!doc) return 'loading...';
+  
   const userName = doc.fullName;
   const firstName = userName.split(' ')[0];
   const name = firstName.charAt(0).toUpperCase() + firstName.slice(1);

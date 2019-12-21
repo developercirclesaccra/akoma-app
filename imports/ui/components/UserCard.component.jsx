@@ -11,15 +11,14 @@ const UserCard = props => {
         <h5 className='card-title'>{props.fullName}</h5>
         <h6 className='card-subtitle mb-2 text-muted'>{props.skill}</h6>
         <p className='card-text'>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          {props.bio}
         </p>
-        <a href='#' className='card-link'>
+        <Link to={'/userprofile'} className='card-link'>
           View
-        </a>
-        <a href='#' className='card-link'>
+        </Link>
+        <Link to={'/book'} className='card-link'>
           Book
-        </a>
+        </Link>
       </div>
     </div>
   );
