@@ -20,7 +20,8 @@ Meteor.methods({
       phone,
       address,
       qualification,
-      skill
+      skill,
+      bio
     } = userObj;
 
     if (!Meteor.user()) throw new Meteor.Error('not-authorized');
@@ -33,6 +34,7 @@ Meteor.methods({
       address,
       qualification,
       skill,
+      bio,
       user_id: this.userId,
       createdAt: new Date()
     });
@@ -55,7 +57,8 @@ Meteor.methods({
       phone,
       address,
       qualification,
-      skills
+      skills,
+      bio
     } = updateObj;
 
     Profiles.update(userId, {
@@ -67,6 +70,7 @@ Meteor.methods({
         address,
         qualification,
         skills,
+        bio,
         updatedAt: new Date()
       }
     });

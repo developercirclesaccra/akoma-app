@@ -3,10 +3,12 @@ import {withTracker} from 'meteor/react-meteor-data';
 import {Link} from 'react-router-dom';
 
 // collections
-import {Profiles} from '../../api/user.js'
+import {Profiles} from '../../api/user.js';
 // components
 import Header from '../components/Header.component.jsx';
 import NavBar from '../components/NavBar.component.jsx';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = props => {
   return (
@@ -14,13 +16,11 @@ const Home = props => {
       <NavBar {...props} />
       <Header />
       <div className='row'>
-        <div className='col-sm-6 bg-secondary'>
-          <div className='container info-pic' width='500' height='600'>
-            <img src='/nanny.jpg' alt='feeding baby' />
-          </div>
+        <div className='col-sm-6 info-pic'>
+          <img src='/nanny.jpg' alt='feeding baby' />
         </div>
         <div className='col-sm-6'>
-          <div className='container mx-auto my-5'>
+          <div className='mx-auto my-5'>
             <h2>Lorem, ipsum dolor.</h2>
             <p>Lorem ipsum dolor sit amet.</p>
             <ul>
@@ -36,6 +36,7 @@ const Home = props => {
           </div>
         </div>
       </div>
+      <div className='row'></div>
     </div>
   );
 };

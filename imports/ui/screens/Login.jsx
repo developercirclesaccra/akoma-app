@@ -32,47 +32,36 @@ const Login = props => {
 
   return (
     <div className='text-center page'>
-      <h1 className='h3 mb-3 font-weight-normal'>Please login</h1>
-      <Card>
-        <Card.Body>
-          <form className='form' onSubmit={submitHandler}>
-            <div className='form-group'>
-              <label htmlFor='email' className='sr-only'>
-                Email
-              </label>
-              <input
-                type='email'
-                className='form-control'
-                placeholder='Enter email'
-                name='email'
-                value={inputsForm.email}
-                onChange={handleInputChange}
-                required
-                autofocus
-              />
-            </div>
-            <div className='form-group'>
-              <label htmlFor='password' className='sr-only'>
-                Password
-              </label>
-              <input
-                type='password'
-                className='form-control'
-                placeholder='Enter password'
-                name='password'
-                value={inputsForm.password}
-                onChange={handleInputChange}
-                required
-                autofocus
-              />
-            </div>
+      <form className='form' onSubmit={submitHandler}>
+        <div className='form-group'>
+          <input
+            type='email'
+            className='form-control'
+            placeholder='Enter email'
+            name='email'
+            value={inputsForm.email}
+            onChange={handleInputChange}
+            required
+            autofocus
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='password'
+            className='form-control'
+            placeholder='Enter password'
+            name='password'
+            value={inputsForm.password}
+            onChange={handleInputChange}
+            required
+            autofocus
+          />
+        </div>
 
-            <Button variant='primary' type='submit'>
-              Submit
-            </Button>
-          </form>
-        </Card.Body>
-      </Card>
+        <Button variant='primary' type='submit'>
+          Submit
+        </Button>
+      </form>
     </div>
   );
 };

@@ -19,11 +19,11 @@ const NavBar = props => {
     props.history.push('/');
   };
 
-  const doc = Profiles.findOne({user_id: props.userId});
-  console.log(props);
+  const doc = Profiles.findOne({user_id: Meteor.userId});
+
+  if (!doc) return 'loading...';
   const userName = doc.fullName;
   const firstName = userName.split(' ')[0];
-  const firstLetter = firstName.split('')[0].toUpperCase();
   const name = firstName.charAt(0).toUpperCase() + firstName.slice(1);
 
   return (
@@ -31,10 +31,13 @@ const NavBar = props => {
       <Navbar.Brand href='#home'>Akoma Home Care</Navbar.Brand>
       <Nav className='mr-auto'></Nav>
       {props.currentUser ? (
-        <NavDropdown
-          title={`<div className="d-flex flex-row"> <div className="rounded-circle bg-info">${firstLetter}</div> <div className="text-white">${name}</div></div>`}>
-          <Link to={'/userprofile'}>Profile</Link>
-          <Link to={'/editprofile'}>Edit profile</Link>
+        <NavDropdown title={`${name}`} className='ml-auto col-1'>
+          <NavDropdown.Item>
+            <Link to={'/userprofile'}>Profile</Link>
+          </NavDropdown.Item>
+          <NavDropdown.Item>
+            <Link to={'/editprofile'}>Edit profile</Link>
+          </NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item>
             <button className='btn' onClick={logoutHandler}>
