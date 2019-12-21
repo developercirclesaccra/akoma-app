@@ -10,10 +10,8 @@ const UserCard = props => {
       <div className='card-body'>
         <h5 className='card-title'>{props.fullName}</h5>
         <h6 className='card-subtitle mb-2 text-muted'>{props.skill}</h6>
-        <p className='card-text'>
-          {props.bio}
-        </p>
-        <Link to={'/userprofile'} className='card-link'>
+        <p className='card-text'>{props.bio}</p>
+        <Link to={`/userprofile/${props._id}`} className='card-link'>
           View
         </Link>
         <Link to={'/book'} className='card-link'>

@@ -22,14 +22,14 @@ const NavBar = props => {
   const doc = Profiles.findOne({user_id: Meteor.userId});
 
   if (!doc) return 'loading...';
-  
+
   const userName = doc.fullName;
   const firstName = userName.split(' ')[0];
   const name = firstName.charAt(0).toUpperCase() + firstName.slice(1);
 
   return (
     <Navbar bg='dark' variant='dark'>
-      <Navbar.Brand href='#home'>Akoma Home Care</Navbar.Brand>
+      <Navbar.Brand href='/index'>Akoma Home Care</Navbar.Brand>
       <Nav className='mr-auto'></Nav>
       {props.currentUser ? (
         <NavDropdown title={`${name}`} className='ml-auto col-1'>
