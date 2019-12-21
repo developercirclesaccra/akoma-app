@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor'
+import {Link} from 'react-router-dom';
+import {Meteor} from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 
 // collections
-import {Profiles} from '../../api/user.js'
+import {Profiles} from '../../api/user.js';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -16,29 +17,30 @@ const NavBar = props => {
     e.preventDefault();
     Meteor.logout();
     props.history.push('/');
-  }
+  };
 
-  const getFirstName = () => {
-    const doc = Profiles.findOne({ user_id: this.userId });
-
-    const userName = doc.fullName;
-    const firstName = userName.split(' ');
-    const firstLetter = firstName.split('')[0].toUpperCase();
-    const name = firstName.charAt(0).toUpperCase();
-
-    return `<div className="d-flex flex-row"> <div className="rounded-circle bg-info">${firstLetter}</div> <div className="text-white">${name}</di></div>`
-  }
+  const doc = Profiles.findOne({user_id: props.userId});
+  console.log(props);
+  const userName = doc.fullName;
+  const firstName = userName.split(' ')[0];
+  const firstLetter = firstName.split('')[0].toUpperCase();
+  const name = firstName.charAt(0).toUpperCase() + firstName.slice(1);
 
   return (
     <Navbar bg='dark' variant='dark'>
       <Navbar.Brand href='#home'>Akoma Home Care</Navbar.Brand>
       <Nav className='mr-auto'></Nav>
       {props.currentUser ? (
-        <NavDropdown title={getFirstName}>
-          <Link  to={'/userprofile'}>Profile</Link>
+        <NavDropdown
+          title={`<div className="d-flex flex-row"> <div className="rounded-circle bg-info">${firstLetter}</div> <div className="text-white">${name}</div></div>`}>
+          <Link to={'/userprofile'}>Profile</Link>
           <Link to={'/editprofile'}>Edit profile</Link>
           <NavDropdown.Divider />
-          <NavDropdown.Item><button className="btn" onClick={logoutHandler}>Sign Out</button> </NavDropdown.Item>
+          <NavDropdown.Item>
+            <button className='btn' onClick={logoutHandler}>
+              Sign Out
+            </button>{' '}
+          </NavDropdown.Item>
         </NavDropdown>
       ) : (
         <Form inline>
@@ -54,4 +56,10 @@ const NavBar = props => {
   );
 };
 
-export default NavBar;
+export default withTracker(() => {
+  Meteor.subscribe('profiles');
+  return {
+    profiles: Profiles.find({}).fetch(),
+    currentUser: Meteor.user()
+  };
+})(NavBar);
